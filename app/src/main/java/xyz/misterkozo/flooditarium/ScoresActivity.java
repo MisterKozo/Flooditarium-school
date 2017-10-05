@@ -1,9 +1,11 @@
 package xyz.misterkozo.flooditarium;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import  android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,8 @@ public class ScoresActivity extends AppCompatActivity {
     private ArrayList<Score> scores;
     private static ScoreListAdapter scoreListAdapter;
     private Context context;
+    private Score score;
+    private int pos;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +70,37 @@ public class ScoresActivity extends AppCompatActivity {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("dardale", "CLICKED");
-                Score score = scores.get(position);
-                String seed = score.getSeed();
-                if(seed == null)
-                    Log.i("dardale", "null");
-                Intent score_play = new Intent(context, PlayActivity.class);
-                score_play.putExtra("seed", seed);
-                startActivity(score_play);
+                pos = position;
+                score = scores.get(position);
+                //Intent score_play = new Intent(context, PlayActivity.class);
+                //score_play.putExtra("seed", score.getSeed());
+                //startActivity(score_play);
+                String question = "Do you want to replay " + score.getPlayer() + "'s game?";
+                //lertDialog = new AlertDialog.Builder(this).create();
+                AlertDialog.Builder builder = new AlertDialog.Builder(ScoresActivity.this);
+                builder.setTitle(getString(R.string.leaveTitle))
+                        .setMessage(question)
+                        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent score_play = new Intent(context, PlayActivity.class);
+                                score_play.putExtra("seed", score.getSeed());
+                                startActivity(score_play);
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // dismiss
+                            }
+                        })
+                        .setIcon(R.drawable.icon)
+                        .show();
+                /*AlertDialog.Builder adb = new AlertDialog.Builder(
+                        ScoresActivity.this);
+                adb.setTitle("List");
+                adb.setMessage(" selected Item is="
+                        +parent.getItemAtPosition(position));
+                adb.setPositiveButton("Ok", null);
+                adb.show();*/
                 //Toast.makeText(getApplicationContext(), String.valueOf(score.getScore()), Toast.LENGTH_LONG).show();
             }
             });

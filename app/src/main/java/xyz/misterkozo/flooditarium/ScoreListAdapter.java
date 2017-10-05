@@ -45,10 +45,10 @@ public class ScoreListAdapter extends ArrayAdapter<Score> implements View.OnClic
                         .setAction("No action", null).show();
                 break;
         }*/
-        String seed = score.getSeed();
+        /*String seed = score.getSeed();
         Intent score_play = new Intent(this.context, PlayActivity.class);
         score_play.putExtra("seed", seed);
-        this.context.startActivity(score_play);
+        this.context.startActivity(score_play);*/
     }
 
     private int lastPosition = -1;
@@ -82,8 +82,8 @@ public class ScoreListAdapter extends ArrayAdapter<Score> implements View.OnClic
         result.startAnimation(animation);*/
         lastPosition = position;
 
-        viewHolder.tv_score.setText(String.valueOf(position+1) + ". " + score.getScore());
-        viewHolder.tv_details.setText("At " + score.getDate() + " by " + score.getPlayer());
+        viewHolder.tv_score.setText(String.valueOf(position+1) + ". " + score.getPlayer());
+        viewHolder.tv_details.setText("At " + score.getDate() + " with " + score.getScore());
         /*viewHolder.txtVersion.setText(score.getVersion_number());
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);*/
