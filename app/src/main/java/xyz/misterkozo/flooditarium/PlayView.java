@@ -59,6 +59,23 @@ public class PlayView extends View {
         //invalidate();
     }
 
+    public PlayView(Context context, String seed) {
+        super(context);
+        this.context = context;
+        this.board = new Board(context, seed);
+        this.size = this.board.GetSize();
+        this.colors = this.board.GetColors();
+        this.maxMoves = Math.round((this.colors * this.size)/4);
+
+        SharedPreferences settings  = this.context.getSharedPreferences("xyz.misterkozo.flooditarium", Context.MODE_PRIVATE);
+        this.sound = settings.getBoolean("sound", true);
+
+        this.scorePaint = new Paint();
+        this.scorePaint.setColor(Color.WHITE);
+        this.scorePaint.setAntiAlias(true);
+        this.scorePaint.setTextSize(16 * getResources().getDisplayMetrics().density);
+    }
+
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
@@ -165,6 +182,7 @@ public class PlayView extends View {
                 Date date = new Date();
                 String now = dateFormat.format(date);
                 scores_intent.putExtra("date", now);
+                //Log.i("dardale", "PUTTING:" + this.board.GetSeed());
                 scores_intent.putExtra("seed", this.board.GetSeed());
                 this.context.startActivity(scores_intent);
             }

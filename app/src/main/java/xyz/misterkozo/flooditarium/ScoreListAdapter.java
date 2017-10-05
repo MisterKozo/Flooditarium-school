@@ -2,6 +2,7 @@ package xyz.misterkozo.flooditarium;
 
         import android.app.Activity;
         import android.content.Context;
+        import android.content.Intent;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -37,13 +38,17 @@ public class ScoreListAdapter extends ArrayAdapter<Score> implements View.OnClic
         Object object = getItem(position);
         Score score = (Score) object;
 
-        switch (v.getId())
+        /*switch (v.getId())
         {
-            /*case R.id.item_info:
+            case R.id.item_info:
                 Snackbar.make(v, "Release date " +score.getFeature(), Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
-                break;*/
-        }
+                break;
+        }*/
+        String seed = score.getSeed();
+        Intent score_play = new Intent(this.context, PlayActivity.class);
+        score_play.putExtra("seed", seed);
+        this.context.startActivity(score_play);
     }
 
     private int lastPosition = -1;
@@ -78,7 +83,7 @@ public class ScoreListAdapter extends ArrayAdapter<Score> implements View.OnClic
         lastPosition = position;
 
         viewHolder.tv_score.setText(String.valueOf(position+1) + ". " + score.getScore());
-        viewHolder.tv_details.setText("At " + score.getDate());
+        viewHolder.tv_details.setText("At " + score.getDate() + " by " + score.getPlayer());
         /*viewHolder.txtVersion.setText(score.getVersion_number());
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);*/

@@ -1,6 +1,7 @@
 package xyz.misterkozo.flooditarium;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +21,12 @@ public class ScoresActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private ArrayList<Score> scores;
     private static ScoreListAdapter scoreListAdapter;
+    private Context context;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
+        this.context = getApplicationContext();
         DatabaseHandler db = new DatabaseHandler(this);
         this.listView = (ListView) findViewById(R.id.list_score);
 
@@ -63,8 +66,15 @@ public class ScoresActivity extends AppCompatActivity {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("dardale", "CLICKED");
                 Score score = scores.get(position);
-                Toast.makeText(getApplicationContext(), String.valueOf(score.getScore()), Toast.LENGTH_LONG).show();
+                String seed = score.getSeed();
+                if(seed == null)
+                    Log.i("dardale", "null");
+                Intent score_play = new Intent(context, PlayActivity.class);
+                score_play.putExtra("seed", seed);
+                startActivity(score_play);
+                //Toast.makeText(getApplicationContext(), String.valueOf(score.getScore()), Toast.LENGTH_LONG).show();
             }
             });
         //tv_offlines.setText(scores);

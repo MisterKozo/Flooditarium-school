@@ -23,6 +23,7 @@ public class Utilities {
             for (int x = 0; x < board.length; x++) {
                 flat += String.valueOf(board[y][x]);
             }
+            flat+=",";
         }
         return flat;
 

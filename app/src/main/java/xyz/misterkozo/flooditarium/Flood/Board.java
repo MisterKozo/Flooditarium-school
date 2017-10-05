@@ -48,7 +48,7 @@ public class Board {
         GenerateNewGame();
     }
 
-    public Board(Context context, int bsx, int bsy, int one, int colors, int size) {
+    /*public Board(Context context, int bsx, int bsy, int one, int colors, int size) {
         this.colors = colors;
         this.size   = size;
         this.board  = new int[size][size];
@@ -59,6 +59,26 @@ public class Board {
         this.one    = one;
 
         GenerateNewGame();
+    }*/
+
+    public Board(Context context, String seed) {
+        this.context = context;
+        this.board = Utilities.inflateBoard(seed);
+        this.size  = this.board.length;
+        this.cells = new Cell[size][size];
+        this.ctrl = new Cell[colors];
+        this.colors = 0;
+        for (int y = 0; y < this.size; y++) {
+            for (int x = 0; x < this.size; x++) {
+                if (this.board[y][x] > this.colors)
+                    this.colors = this.board[y][x];
+                this.cells[y][x] = new Cell();
+                this.cells[y][x].SetColor(this.board[y][x]);
+            }
+        }
+        this.colors++;
+        this.seed = seed;
+        //NewFromSeed(seed);
     }
 
     public void AfterThought(Canvas canvas, int bsx, int bsy, int one) {
@@ -79,7 +99,7 @@ public class Board {
         ResetBoard();
         NewBoard();
         //PrepareCells();
-        //CreateSeed();
+        CreateSeed();
     }
 
     public void ResetBoard() {
