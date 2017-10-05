@@ -1,5 +1,6 @@
 package xyz.misterkozo.flooditarium;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -175,7 +178,7 @@ public class PlayView extends View {
                 int score = colors * 10000;
                 score = (this.maxMoves^2 / this.moves)*100;
                 Toast.makeText(this.context, "Congratulations! You have flooded the board in " + String.valueOf(this.moves) + " moves.", Toast.LENGTH_LONG).show();
-                Intent scores_intent = new Intent(this.context, ScoresActivity.class);
+                final Intent scores_intent = new Intent(this.context, ScoresActivity.class);
 
                 scores_intent.putExtra("score", score);//higher is better
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -184,7 +187,29 @@ public class PlayView extends View {
                 scores_intent.putExtra("date", now);
                 //Log.i("dardale", "PUTTING:" + this.board.GetSeed());
                 scores_intent.putExtra("seed", this.board.GetSeed());
-                this.context.startActivity(scores_intent);
+
+                SharedPreferences settings  = this.context.getSharedPreferences("xyz.misterkozo.flooditarium", Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = settings.edit();
+                final String previousName = settings.getString("name", "Player");
+
+                final Dialog dialog_settings  = new Dialog(getContext());
+                dialog_settings.setContentView(R.layout.dialog_name);
+                dialog_settings.setCancelable(false);
+                final EditText et_name = (EditText) dialog_settings.findViewById(R.id.et_name);
+                final Button bt_save   = (Button) dialog_settings.findViewById(R.id.bt_save);
+
+                et_name.setText(previousName);
+
+                bt_save.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        scores_intent.putExtra("player", String.valueOf(et_name.getText()));
+                        dialog_settings.dismiss();
+                        context.startActivity(scores_intent);
+                    }
+                });
+                dialog_settings.show();
             }
         }
 

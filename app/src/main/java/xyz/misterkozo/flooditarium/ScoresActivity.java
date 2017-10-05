@@ -44,7 +44,7 @@ public class ScoresActivity extends AppCompatActivity {
         if (getIntent().hasExtra("date") && getIntent().hasExtra("score")) {
             int score = getIntent().getExtras().getInt("score");
             String date = getIntent().getExtras().getString("date");
-            String player = settings.getString("name", "Player");
+            String player = getIntent().getExtras().getString("player");
             String seed = getIntent().getExtras().getString("seed");
             Score scoreObj = new Score(date, score, player, seed);
             db.addScore(scoreObj);
