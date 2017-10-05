@@ -28,7 +28,6 @@ public class ScoreListAdapter extends ArrayAdapter<Score> implements View.OnClic
         super(context, R.layout.list_score, data);
         this.dataSet = data;
         this.context = context;
-
     }
 
     @Override
