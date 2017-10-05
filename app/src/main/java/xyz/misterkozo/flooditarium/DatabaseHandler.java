@@ -42,6 +42,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_DATE, score.getDate());
         values.put(KEY_SCORE, score.getScore());
+        values.put(KEY_PLAYER, score.getPlayer());
+        values.put(KEY_SEED, score.getSeed());
 
         db.insert(TABLE_SCORES, null, values);
         db.close();
@@ -60,6 +62,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 score.setId(Integer.parseInt(cursor.getString(0)));
                 score.setDate(cursor.getString(1));
                 score.setScore(Integer.parseInt(cursor.getString(2)));
+                score.setPlayer(cursor.getString(3));
+                score.setSeed(cursor.getString(4));
                 scoreList.add(score);
             } while (cursor.moveToNext());
         }

@@ -165,6 +165,7 @@ public class PlayView extends View {
                 Date date = new Date();
                 String now = dateFormat.format(date);
                 scores_intent.putExtra("date", now);
+                scores_intent.putExtra("seed", this.board.GetSeed());
                 this.context.startActivity(scores_intent);
             }
         }

@@ -290,4 +290,6 @@ public class Board {
 
     public int GetDifficulty() { return (this.colors/this.size)*100; }
 
+    public String GetSeed() { return this.seed; }
+
 }

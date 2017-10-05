@@ -8,22 +8,30 @@ public class Score {
     private int id;
     private String date;
     private int score;
+    private String player;
+    private String seed;
 
     public Score() {
-        this.id    = 0;
-        this.date  = "";
-        this.score = 0;
+        this.id     = 0;
+        this.date   = "";
+        this.score  = 0;
+        this.player = "";
+        this.seed   = "";
     }
 
-    public Score(int id, String date, int score) {
-        this.id    = id;
-        this.date  = date;
-        this.score = score;
+    public Score(int id, String date, int score, String player, String seed) {
+        this.id     = id;
+        this.date   = date;
+        this.score  = score;
+        this.player = player;
+        this.seed   = seed;
     }
 
-    public Score(String date, int score) {
+    public Score(String date, int score, String player, String seed) {
         this.date  = date;
         this.score = score;
+        this.player = player;
+        this.seed   = seed;
     }
 
     public int getId() {
@@ -49,4 +57,12 @@ public class Score {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public String getPlayer() { return this.player; }
+
+    public void setPlayer(String player) { this.player = player; }
+
+    public String getSeed() { return this.seed; }
+
+    public void setSeed(String seed) { this.seed = seed; }
 }

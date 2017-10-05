@@ -29,7 +29,7 @@ public class ScoresActivity extends AppCompatActivity {
 
         scores = new ArrayList<>();
 
-        //settings = getSharedPreferences("xyz.misterkozo.flooditarium", Context.MODE_PRIVATE);
+        settings = getSharedPreferences("xyz.misterkozo.flooditarium", Context.MODE_PRIVATE);
         //editor = this.settings.edit();
 
         //this.tv_offlines = (TextView) findViewById(R.id.tv_offlines);
@@ -37,7 +37,9 @@ public class ScoresActivity extends AppCompatActivity {
         if (getIntent().hasExtra("date") && getIntent().hasExtra("score")) {
             int score = getIntent().getExtras().getInt("score");
             String date = getIntent().getExtras().getString("date");
-            Score scoreObj = new Score(date, score);
+            String player = settings.getString("name", "Player");
+            String seed = getIntent().getExtras().getString("seed");
+            Score scoreObj = new Score(date, score, player, seed);
             db.addScore(scoreObj);
         }
 
