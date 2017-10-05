@@ -20,6 +20,7 @@ public class Board {
     private String seed;
     private String table = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private int unit, division;
+    private int ctrlPosY = 0;
 
     public Board(Context context, Canvas canvas, int bsx, int bsy, int one, int colors, int size) {
         //input is actual (human, +1) number of colors
@@ -171,7 +172,7 @@ public class Board {
     }
 
     public void CreateSeed() {
-        int tl = table.length();
+        /*int tl = table.length();
         String toSeed = "";
         for (int y = 0; y < this.size; y++) {
             for (int x = 0; x < this.size; x++) {
@@ -192,16 +193,28 @@ public class Board {
                 meanwhile += toSeed.charAt(i);
             }
         }
-        this.seed += table.charAt(Integer.valueOf(Utilities.removeLastChar(meanwhile)));
+        this.seed += table.charAt(Integer.valueOf(Utilities.removeLastChar(meanwhile)));*/
+        this.seed = Utilities.deflateBoard(this.board);
     }
 
     public void NewFromSeed(String seed) {
-        this.seed = seed;
+        /*this.seed = seed;
         String fromSeed = "";
         for (int i = 0; i < seed.length(); i++) {
             fromSeed += Utilities.firstOccurrence(this.table, seed.charAt(i));
+        }*/
+        ResetBoard();
+        this.seed = seed;
+        this.board = Utilities.inflateBoard(seed);
+        this.size = Math.round((long)Math.sqrt((seed.length())));
+        this.colors = 0;
+        for (int y = 0; y < this.size; y++) {
+            for (int x = 0; x < this.size; x++) {
+                if (this.board[y][x] > this.colors)
+                    this.colors = this.board[y][x];
+                this.cells[y][x].SetColor(this.board[y][x]);
+            }
         }
-        //TODO
     }
 
     public void RefreshValues() {
@@ -259,18 +272,21 @@ public class Board {
         this.division = (this.colors*3) + (this.colors-1) + 2; //controls, as inferred from here, span across 3 units
         this.unit     = (this.canvas.getWidth() / this.division);
 
-        int posX, posY;
+        int posX = 0, posY = 0;
         for (int i = 0; i < this.colors; i++) {
             posX = this.unit + this.unit*3*i + this.unit*i;
             posY = this.canvas.getHeight() - this.unit - this.unit*3;
             this.ctrl[i] = new Cell(this.canvas, posX, posY, i, this.unit*3);
             this.ctrl[i].PrepareCell();
         }
+
+        this.ctrlPosY = posY;
     }
 
     public int GetDivision() { return this.division; }
     public int GetUnit() { return this.unit; }
     public Cell[] GetCtrl() { return this.ctrl; }
+    public int GetCtrlPosY() { return this.ctrlPosY; }
 
     public int GetDifficulty() { return (this.colors/this.size)*100; }
 

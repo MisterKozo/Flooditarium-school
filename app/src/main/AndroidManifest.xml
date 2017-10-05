@@ -48,6 +48,7 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <service android:enabled="true" android:stopWithTask="true" android:name=".BackgroundSoundService" />
 
     </application>
 

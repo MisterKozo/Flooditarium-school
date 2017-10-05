@@ -1,6 +1,7 @@
 package xyz.misterkozo.flooditarium;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,11 +16,33 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences settings;
+    private Intent svc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        settings  = this.getSharedPreferences("xyz.misterkozo.flooditarium", Context.MODE_PRIVATE);
+        svc = new Intent(this, BackgroundSoundService.class);
+
+        if (settings.getBoolean("sound", true))
+            startService(svc);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (settings.getBoolean("sound", true))
+            startService(svc);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (settings.getBoolean("sound", true))
+            stopService(svc);
     }
 
     public void main_play(View v) {

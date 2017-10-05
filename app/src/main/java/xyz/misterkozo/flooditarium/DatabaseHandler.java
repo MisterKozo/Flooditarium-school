@@ -9,10 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by adhoms on 10/3/17.
- */
-
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int    DATABASE_VERSION = 1;
     private static final String DATABASE_NAME    = "scoresManager";

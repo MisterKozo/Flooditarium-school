@@ -1,5 +1,6 @@
 package xyz.misterkozo.flooditarium;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,5 +16,8 @@ public class PlayActivity extends AppCompatActivity {
         this.colors = getIntent().getExtras().getInt("colors");
         this.playView = new PlayView(this, this.difficulty, this.size, this.colors);
         setContentView(this.playView);
+
+        /*Intent svc=new Intent(this, BackgroundSoundService.class);
+        stopService(svc);*/
     }
 }
