@@ -37,10 +37,11 @@
     <string name="right">Forward</string>
     <string name="visual">Visual Instructions</string>
 
-    <string name="inst0">The controls at the bottom let you flood the board from the first row and column with one color. Your goal is to flood the entire board.</string>
-    <string name="inst1">Wait for the machine to calibrate.</string>
-    <string name="inst2">Select your desired target on the map.</string>
-    <string name="inst3">INVOKE CHAOS!</string>
+    <string name="inst0">Select the dimensions of your board.\nThe size must be between 10 and 30, and the number of colors between 2 and 6.</string>
+    <string name="inst1">The controls at the bottom allow you to "flood" a group of identically colored cells, starting from the cell at the upper right corner.</string>
+    <string name="inst2">Your goal is to fill the entire board with one color. You will be scored at the end- the less moves you make, the higher the score will be. There is no time limit, nor is time counted in the calculation of your final score. However, there is a limit for the amount of moves that you can make. The limit is calculated like so: (SIZE*COLORS)/4, as can be seen in the source code.</string>
+    <string name="inst3">The default name can be found and changed at the settings screen. However, after each successful game, you will be given the option to use a different name. The default name is there for the sake of ease of use, to avoid forcing players to write their names after each game.</string>
+    <string name="inst4">Your score will only be shown if it is amongst the top 10. Clicking a score will take you to the board in which the score was achieved, if you fancy beating a rival in their own board.</string>
 
     <string name="deleteText">Are you sure you want to reset all scores and preferences? THIS CANNOT BE UNDONE!</string>
     <string name="replayText"></string>

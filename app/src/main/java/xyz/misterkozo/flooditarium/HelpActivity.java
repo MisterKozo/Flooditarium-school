@@ -29,18 +29,18 @@ public class HelpActivity extends AppCompatActivity {
 
         position = 0;
         db_instructions = new int[] {
-                /*R.drawable.inst0,
+                R.drawable.inst0,
                 R.drawable.inst1,
                 R.drawable.inst2,
-                R.drawable.inst3,*/
-                R.drawable.icon
+                R.drawable.inst3,
+                R.drawable.inst4
         };
         st_instructions = new int[] {
-                /*R.string.inst0,
+                R.string.inst0,
                 R.string.inst1,
                 R.string.inst2,
-                R.string.inst3*/
-                R.string.inst0
+                R.string.inst3,
+                R.string.inst4
         };
 
         Switch(0);
