@@ -17,7 +17,9 @@
         android:layout_margin="25dp"
         android:contentDescription="@string/left"
         android:onClick="help_back"
-        android:src="@drawable/left" />
+        android:src="@drawable/left"
+        android:scaleType="centerCrop"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/bt_forward"
@@ -29,7 +31,8 @@
         android:contentDescription="@string/right"
         android:onClick="help_forward"
         android:src="@drawable/right"
-        android:background="@color/colorAccent" />
+        android:scaleType="centerCrop"
+        android:background="@null"/>
 
     <ImageView
         android:id="@+id/img_instruction"

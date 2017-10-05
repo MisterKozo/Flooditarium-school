@@ -33,7 +33,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bt_back"
@@ -42,16 +42,9 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout2">
+        android:id="@+id/list_score">
 
-        <TextView
-            android:id="@+id/tv_offlines"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="No games yet!" />
-
-    </LinearLayout>
+    </ListView>
 
     <TextView
         android:id="@+id/tv_time"
@@ -69,7 +62,7 @@
         android:id="@+id/tv_elapsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout2"
+        android:layout_below="@+id/list_score"
         android:layout_toEndOf="@+id/bt_back"
         android:text="@string/time_elapsed"
         android:textSize="8sp"
@@ -81,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/linearLayout2"
+        android:layout_below="@+id/list_score"
         android:text="@string/seconds"
         android:textSize="8sp"
         android:visibility="invisible"

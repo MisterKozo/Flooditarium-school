@@ -17,6 +17,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID       = "id";
     private static final String KEY_DATE     = "date";
     private static final String KEY_SCORE    = "score";
+    private static final String KEY_PLAYER   = "player";
+    private static final String KEY_SEED     = "seed";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_SCORES_TABLE = "CREATE TABLE " + TABLE_SCORES + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DATE + " TEXT," + KEY_SCORE + " INTEGER" + ")";
+        String CREATE_SCORES_TABLE = "CREATE TABLE " + TABLE_SCORES + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DATE + " TEXT," + KEY_SCORE + " INTEGER," + KEY_PLAYER + " TEXT," + KEY_SEED + " TEXT" + ")";
         db.execSQL(CREATE_SCORES_TABLE);
     }
 
