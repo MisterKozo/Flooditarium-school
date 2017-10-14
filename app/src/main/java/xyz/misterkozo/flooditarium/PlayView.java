@@ -175,11 +175,13 @@ public class PlayView extends View {
 
             if (this.board.IsSolved()) {
                 Float sf = (float)(this.maxMoves / this.moves)*100;
-                int score = colors * 10000;
-                score = (this.maxMoves^2 / this.moves)*100;
+                int score;
                 Toast.makeText(this.context, "Congratulations! You have flooded the board in " + String.valueOf(this.moves) + " moves.", Toast.LENGTH_LONG).show();
                 final Intent scores_intent = new Intent(this.context, ScoresActivity.class);
 
+                score = this.maxMoves*this.maxMoves;
+                score = score * 100;
+                score = score / this.moves;
                 scores_intent.putExtra("score", score);//higher is better
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
